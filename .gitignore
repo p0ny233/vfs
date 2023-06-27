@@ -14,6 +14,7 @@ build/
 third_party/
 
 .vscode/
+.vs/
 tmp/
 
 .DS_Store
