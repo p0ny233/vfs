@@ -373,7 +373,7 @@ std::shared_ptr<ABObject> LevelDbFileSystem::FindObject(const std::string& path)
   std::shared_ptr<ABObject> obj = nullptr;
   if (path == "/" || path == "") {
     obj = std::make_shared<ABObject>();
-    obj->CopyFrom(rootNode_);
+    obj->CopyFrom(rootNode_);  // ???   ABObject rootNode_;  from rootNode_ copy to obj
     return obj;
   }
 
