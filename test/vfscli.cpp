@@ -51,7 +51,7 @@ int ls(IVirtualFileSystem* fs, const std::string& path, bool recursive, bool ver
         std::string parent_path = "";
         _ls(fs, parent, &parent_path);
     } else {
-        if (isDirectory(parent->flags())) {
+        if (isDirectory(parent->flags())) {  // parent->flags() = 0
             IVirtualFileSystem::ObjectList list = fs->ListDirectory(parent->handle());
             for (auto item : list) {
                 if (isDirectory(item->flags())) {

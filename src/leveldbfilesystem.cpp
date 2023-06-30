@@ -331,7 +331,7 @@ bool LevelDbFileSystem::RenameObject(const std::string& old_path, const std::str
   return db_->Write(leveldb::WriteOptions(), &batch).ok();
 }
 
-IVirtualFileSystem::ObjectList LevelDbFileSystem::ListDirectory(int64_t parent_id) const {
+IVirtualFileSystem::ObjectList LevelDbFileSystem::ListDirectory(int64_t parent_id) const {  // parent_id = 1
    if (parent_id == -1) {
     parent_id = kRootHandle;
   }
@@ -342,7 +342,7 @@ IVirtualFileSystem::ObjectList LevelDbFileSystem::ListDirectory(int64_t parent_i
   EncodingStoreKey(parent_id, "", &key_start);
   EncodingStoreKey(parent_id + 1, "", &key_end);
   leveldb::Iterator* it = db_->NewIterator(leveldb::ReadOptions());
-  for (it->Seek(key_start); it->Valid(); it->Next()) {
+  for (it->Seek(key_start); it->Valid(); it->Next()) {  // what、why、how ??????
     leveldb::Slice key = it->key();
     if (key.compare(key_end) >= 0) {
       break;
@@ -371,10 +371,10 @@ IVirtualFileSystem::ObjectList LevelDbFileSystem::ListDirectory(const std::strin
 
 std::shared_ptr<ABObject> LevelDbFileSystem::FindObject(const std::string& path) const {
   std::shared_ptr<ABObject> obj = nullptr;
-  if (path == "/" || path == "") {
+  if (path == "/" || path == "") {  // always path == "/"
     obj = std::make_shared<ABObject>();
     obj->CopyFrom(rootNode_);  // ???   ABObject rootNode_;  from rootNode_ copy to obj
-    return obj;
+    return obj; // ...
   }
 
   std::vector<std::string> paths = absl::StrSplit(path, "/");

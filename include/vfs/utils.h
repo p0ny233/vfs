@@ -38,8 +38,8 @@ inline uint64_t DecodeBigEndian(const char* ptr) {
 }
 
 inline bool isDirectory(int32_t flags) {
-  return !((flags & AB_FLAG_FILE_ITEM) == AB_FLAG_FILE_ITEM) // not a file item
-         && !((flags & AB_FLAG_LINK_ITEM) == AB_FLAG_LINK_ITEM); // and not a link item
+  return !((flags & AB_FLAG_FILE_ITEM) == AB_FLAG_FILE_ITEM) // not a file item  1
+         && !((flags & AB_FLAG_LINK_ITEM) == AB_FLAG_LINK_ITEM); // and not a link item  2
 }
 
 int compress_backup_file(const char* source_file, uint8_t file_version, int64_t db_version, const char* dest_file);
